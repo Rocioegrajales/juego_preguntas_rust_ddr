@@ -1,0 +1,133 @@
+Preguntas del juego
+
+Cuál de las sigueintes funciones está bien escrita
+funciton tomaNombre -> () //correcta
+funtion tomaNombre => ()
+funtion tomaNombre () => {}
+funtion tomaNombre () -> {}
+
+Rust tiene una sintaxis similar a:
+
+a. Java
+b. Python
+c. C++
+d. Solidity
+
+Qué empresa desarrolló Rust
+
+a. Microsoft
+b. Mozilla
+c. Google
+d. Brave
+
+
+Para qué sirve la programación en Rust
+
+a. Crear páginas web interactivas y dinámicas
+b. Crear aplicaciones, sitios web, software, y automatizar tareas
+c. Crear contratos inteligentes para plataformas de blockchain, como Ethereum
+d. Desarrollar sistemas operativos
+
+Los campos de una estructura en Rust se encierran en
+
+a. Llaves
+b. Corchetes
+c. Paréntesis
+d. Llave y paréntesis
+
+La instrucción match en Rust permite
+
+a.Validar coincidencias de patrones y tomar decisiones en función de los diferentes casos que pueden ocurrir.
+b. Ejecutar código basado en una condición y/o de repetir código mientras se cumpla una condición
+c. Crear condicionales 
+d. Iterar sobre una secuencia de elementos
+
+Para crear referencias en Rust, que van seguidas del valor al que se quiere hacer referencia, se utiliza el operador
+a. &
+b. Xor
+c. >=
+d.^
+
+codigo:
+use std::io;
+use rand::Rng;
+struct Pregunta {
+    texto: String,
+    respuestas: Vec<Respuesta>,
+}
+
+struct Respuesta {
+    texto: String,
+    valor: bool,
+}
+
+fn main() {
+    let mut cuenta : Vec<i32> = vec![];
+    println!("Bienvenido, quieres jugar rust challenge:");
+    println!("Por fa digita tu nombre para comenzar:");
+    let mut nombre=tomaNombre();
+    let mut cur_res : i32 = 0;
+    let mut sum = 0;
+    for i in 0..3{
+        cur_res=Eva_facil();
+        cuenta.push(cur_res);
+        sum=sum+cur_res;
+    }
+    println!("puntaje: {}",sum);
+    
+}
+fn tomaNombre()->String{
+    let mut c = String::new();
+    io::stdin()
+        .read_line(&mut c)
+        .expect("failed to read input.");
+    return c;
+
+}
+fn Eva_facil() -> i32{
+    let pregunta_1 = Pregunta { texto: String::from("¿Que dia es hoy?"),
+    respuestas: vec![
+    Respuesta{texto:String::from("Domingo"), valor: false}, 
+    Respuesta{texto:String::from("Sabado"), valor: true},
+    ]};
+    let pregunta_2 = Pregunta { texto: String::from("¿Que hora es?"),
+    respuestas: vec![
+    Respuesta{texto:String::from("11 am"), valor: false}, 
+    Respuesta{texto:String::from("12 m"), valor: true},
+    ]};
+    let pregunta_3 = Pregunta { texto: String::from("2+2=?"),
+    respuestas: vec![
+    Respuesta{texto:String::from("4"), valor: true}, 
+    Respuesta{texto:String::from("5"), valor: false},
+    ]};
+    let preguntas =vec!(pregunta_1, pregunta_2);
+    let mut rng = rand::thread_rng();
+    let len = preguntas.len() as i32;
+    let x : usize = rng.gen_range(0..len) as usize;
+    let mut current = &preguntas[x];    
+    println!("{}",current.texto);
+    let mut opcion = String::new();
+    let mut j=0;
+    for i in &current.respuestas{
+        
+        println!("{}. {}",j, current.respuestas[j].texto);
+        j=j+1
+    }
+    println!("Escoge tu respuesta");
+    io::stdin()
+        .read_line(&mut opcion)
+        .expect("failed to read input.");
+    let opcion = opcion.trim().parse::<usize>().expect("invalid input");
+    let mut res = current.respuestas[opcion].valor;
+    let mut z= 0;
+    if res == true{z=1} else{z=0}
+    return z;
+}
+
+
+El patrón Patrón match: match en Rust
+
+a. Descompone estructuras complejas, como tuplas, estructuras (structs) o enumeraciones (enums), directamente en los parámetros de una función.
+b. Se utiliza para trabajar con referencias a datos en lugar de los datos en sí mismos
+c. Compara un valor contra varios patrones y ejecuta el código asociado al primer patrón que coincida.
+d. Permite desestructurar una tupla directamente en los parámetros de una función.
